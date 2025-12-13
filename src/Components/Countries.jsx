@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { use } from 'react';
+import Country from './Country';
 
-const countriesPromise = fetch('https://openapi.programming-hero.com/api/all')
-    .then(res => res.json());
 
-const Countries = () => {
+const Countries = ({ countriesPromise }) => {
+
+    const countriesData = use(countriesPromise);
+    const countries = countriesData.countries;
+
     return (
         <div>
-            <h1>In the Countries Project workflow</h1>
+            <h1>In the countries : {countries.length}</h1>
+            {
+                countries.map(country => <Country country={country}></Country>)
+            }
         </div>
     );
 };
