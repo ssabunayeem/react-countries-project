@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <h1>App.jsx</h1>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <Countries countriesPromise={countriesPromise}></Countries>
       </Suspense>
     </>
