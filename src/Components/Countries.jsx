@@ -8,6 +8,7 @@ const Countries = ({ countriesPromise }) => {
     const countries = countriesData.countries;
 
     const [visitedCountries, setVisitedCountries] = useState([]);
+    const [visitedFlags, setVisitedFlags] = useState([]);
 
     const handleVisitedCountries = (country) => {
         console.log('handle visited countries', country);
@@ -15,24 +16,48 @@ const Countries = ({ countriesPromise }) => {
         setVisitedCountries(newVisitedCountries);
     }
 
+    const handleVisitedFlags = (flag) => {
+        const newVisitedFlags = [...visitedFlags, flag];
+        setVisitedFlags(newVisitedFlags);
+    }
+
     // console.log(countries);
 
     return (
         <div>
-            <h1>In the countries : {countries.length}</h1>
-            <h1>Total country visited : {visitedCountries.length}</h1>
+            <h2>In the countries : {countries.length}</h2>
+
+
+            <h2>Total country visited : {visitedCountries.length}</h2>
             <ol>
                 {
-                    visitedCountries.map(country => <li>{country.name.common}</li>)
+                    visitedCountries.map(country => <li key={country.cca3.cca3}>{country.name.common}</li>)
                 }
             </ol>
+
+
+
+            <h2>Total visited Flags: {visitedFlags.length}</h2>
+            <div className='visited-flags'>
+                {
+                    visitedFlags.map(flag => <img src={flag}></img>)
+                }
+            </div>
+
+
             <div className='countries'>
                 {
                     countries.map(country =>
-                        <Country key={country.cca3.cca3} country={country} handleVisitedCountries={handleVisitedCountries}>
+                        <Country
+                            key={country.cca3.cca3}
+                            country={country}
+                            handleVisitedCountries={handleVisitedCountries}
+                            handleVisitedFlags={handleVisitedFlags}>
                         </Country>)
                 }
             </div>
+
+
         </div>
     );
 };
